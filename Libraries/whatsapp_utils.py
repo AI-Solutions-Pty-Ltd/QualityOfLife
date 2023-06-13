@@ -1,6 +1,11 @@
 import webbrowser
 import tkinter as tk
 from tkinter import ttk
+import subprocess
+import time
+import sys
+import pyautogui
+from pywinauto import Application
 
 def whatsapp_gui(tab_control):
     def open_whatsapp_and_chat(event=None):
@@ -18,12 +23,20 @@ def whatsapp_gui(tab_control):
     open_button = tk.Button(first_tab, text="Open WhatsApp Chat", command=open_whatsapp_and_chat)
     open_button.pack()
     
+def activate_and_kill_chrome():
+    app = Application().connect(title_re=".*Chrome.*")
+    chrome_window = app.top_window()
+    chrome_window.set_focus()
+    pyautogui.hotkey("Ctrl", "w")
+        
 def open_whatsapp_chat(number):
-    # Remove leading zero and add "+27"
     whatsapp_number = "+27" + number[1:]
-    # WhatsApp URL format: https://wa.me/<number>
     whatsapp_url = f"https://wa.me/{whatsapp_number}"
-    webbrowser.open(whatsapp_url)
+    
+    subprocess.Popen(["start", "", whatsapp_url], shell=True)
+
+    time.sleep(3)
+    activate_and_kill_chrome()
 
 def open_website(number):
     if len(number) >= 10 and number.startswith("0"):
