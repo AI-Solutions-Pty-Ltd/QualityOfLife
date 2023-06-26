@@ -1,9 +1,7 @@
 import webbrowser
 import tkinter as tk
 from tkinter import ttk
-import subprocess
 import time
-import sys
 import pyautogui
 from pywinauto import Application
 
@@ -33,7 +31,7 @@ def open_whatsapp_chat(number):
     whatsapp_number = "+27" + number[1:]
     whatsapp_url = f"https://wa.me/{whatsapp_number}"
     
-    subprocess.Popen(["start", "", whatsapp_url], shell=True)
+    webbrowser.open(whatsapp_url)
 
     time.sleep(3)
     activate_and_kill_chrome()
