@@ -8,15 +8,10 @@ import os
 # Tab 4 - PDF PWd remover
 def remove_pwd_gui(tab_control):
     def select_pdf_folder():
-        def open_directory_dialog():
-            file_names = filedialog.askopenfilenames()
-            if file_names:
-                password = password_entry.get()
-                remove_password(file_names, password)
-
-        # Create a new thread to run the directory dialog
-        t = threading.Thread(target=open_directory_dialog)
-        t.start()
+        file_names = filedialog.askopenfilenames()
+        if file_names:
+            password = password_entry.get()
+            remove_password(file_names, password)
 
     tab = ttk.Frame(tab_control)
     tab_control.add(tab, text="PDF Password Remover")
