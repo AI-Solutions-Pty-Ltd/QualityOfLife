@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <title>Open in Whatsapp</title>
+
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <link rel="stylesheet" href="./pyscript.css" />
+        <script defer src="./pyscript.js"></script>
+        <py-config>
+          [[fetch]]
+          files = ["/whatsapp_utils.py"]
+        </py-config>
+    </head>
+    <body>
+      <py-script>
+        from whatsapp_utils import open_website
+        def whatsapp():
+          open_website()
+      </py-script>
+
+      <div class="row">
+        <div class="col s12 m2 offset-m5">
+          <form>
+            <label for="whatsapp_number">Please enter whatsapp number (SA NUMBER)</label>
+            <input type="number" id="whatsapp_number" value="" class="input-field">
+            <br>
+            <div class="center-align">
+              <button py-click="whatsapp()" class="btn">Open in Whatsapp</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </body>
+</html>
