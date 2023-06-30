@@ -5,6 +5,7 @@ from Libraries.whatsapp_utils import whatsapp_gui
 from Libraries.excel_parser import parse_excel_gui
 from Libraries.export_pdf_pages import export_pdf_gui
 from Libraries.password_remover import remove_pwd_gui
+from Libraries.combine_pdf_pages import combine_pdf_gui
 
 # Create the GUI window
 window = tk.Tk()
@@ -25,6 +26,9 @@ export_pdf_gui(tab_control)
 
 # Tab 4 - Pdf Pwd remover
 remove_pwd_gui(tab_control)
+
+# Tab 5 - Combine Pdf Pwd
+combine_pdf_gui(tab_control)
 
 tab_control.pack(expand=1, fill="both")
 window.mainloop()
