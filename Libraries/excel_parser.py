@@ -41,7 +41,8 @@ def parse_excel(excel_data, checkbox_value):
                 # Access row values using row['column_name']
                 owner = row['Owner'][0:8]
                 property = row['Property'][0:8]
-                web_url = f"https://rms.propertysuite.co.za/Owners/Owner.aspx?OwnerID={owner}&PID={property}"
+                # web_url = f"https://rms.propertysuite.co.za/Owners/Owner.aspx?OwnerID={owner}&PID={property}"
+                web_url = f"https://rms.propertysuite.co.za/Route/?d=stmt&tp=own&o={owner}&p={property}"
                 webbrowser.open_new_tab(web_url)
             
         # Make changes to the data
@@ -51,7 +52,11 @@ def parse_excel(excel_data, checkbox_value):
         try:
             df['Account Number'] = df['ACC NUM']
         except:
-            df['Account Number'] = df['ACC NUMBER']
+            try:
+                df['Account Number'] = df['ACC NUMBER']
+            except:
+                df['Account Number'] = df['BANK ACC']
+                
         df['Their Reference'] = df.apply(lambda row: "GME " + row['Property'].split(maxsplit=1)[1] + " RENT", axis=1)
         df['My Reference'] = df.apply(lambda row: "OWN" + row['Owner'].split(" - ")[0][3:].lstrip('0') + " " + row['Property'].split(maxsplit=1)[1], axis=1)
         df['Amount'] = df['Amount'].abs()
