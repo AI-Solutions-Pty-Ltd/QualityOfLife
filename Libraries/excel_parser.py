@@ -47,7 +47,12 @@ def parse_excel(excel_data, checkbox_value):
             
         # Make changes to the data
         df['Batch Name'] = df.apply(lambda row: "OWNER " + row['Property'].split(maxsplit=1)[1], axis=1)
-        df['Owner name'] = df.apply(lambda row: row['Owner'].split(" - ")[1].split(maxsplit=1)[1].strip(), axis=1)
+        
+        try:
+            df['Owner name'] = df.apply(lambda row: row['Owner'].split(" - ")[1].split(maxsplit=1)[1].strip(), axis=1)
+        except:
+            df['Owner'] = df.apply(lambda row: row['Owner'].split(" - ")[1].split(maxsplit=1)[1].strip(), axis=1)
+            
         df['Bank'] = df['BANK']
         try:
             df['Account Number'] = df['ACC NUM']
