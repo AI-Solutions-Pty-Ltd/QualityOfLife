@@ -7,6 +7,7 @@ from Libraries.export_pdf_pages import export_pdf_gui
 from Libraries.password_remover import remove_pwd_gui
 from Libraries.combine_pdf_pages import combine_pdf_gui
 from Libraries.html_parser import parse_html_gui
+from Libraries.fnb_html_parser import parse_fnb_html_gui
 
 # Create the GUI window
 window = tk.Tk()
@@ -33,6 +34,9 @@ combine_pdf_gui(tab_control)
 
 # Tab 6 - Parse HTML table
 parse_html_gui(tab_control)
+
+# Tab 7 - Parse FNB HTML table
+parse_fnb_html_gui(tab_control)
 
 tab_control.pack(expand=1, fill="both")
 window.mainloop()
