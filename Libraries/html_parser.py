@@ -33,14 +33,36 @@ def extract_table_to_excel(html_table):
         table = soup.find('table')
         
         # Extract the table headers
-        headers = [th.text.strip() for th in table.find_all('th')]
+        headers = []
+        for th in table.find_all('th'):
+            colspan = int(th.get('colspan', 1))
+            header_text = th.text.strip()
+            headers.extend([f"{header_text} {i}" for i in range(1, colspan + 1)])
 
         # Extract the table data
         data = []
         for row in table.find_all('tr'):
-            row_data = [td.text.strip() for td in row.find_all('td')]
+            row_data = []
+            for td in row.find_all('td'):
+                # Check if the <td> contains an <input> element with checkbox
+                input_elem = td.find('input', {
+                    'type': 'checkbox',
+                    'checked': 'True',
+                    })
+                if input_elem:
+                    row_data.append(True)
+                else:
+                    input_elem = td.find('input', {
+                        'type': 'checkbox',
+                        })
+                    if input_elem:
+                        row_data.append(False)
+                    else:
+                        row_data.append(td.text.strip())
+                    # Otherwise, add the text content of the <td>
             if row_data:
                 data.append(row_data)
+                
         print('data extracted')
         # Create a DataFrame using pandas
         df = pd.DataFrame(data, columns=headers)
