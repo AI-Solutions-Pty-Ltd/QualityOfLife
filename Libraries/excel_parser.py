@@ -66,6 +66,7 @@ def parse_excel(excel_data, checkbox_value):
                 
         df['Their Reference'] = df.apply(lambda row: "GME " + row['Property'].split(maxsplit=1)[1] + " RENT", axis=1)
         df['My Reference'] = df.apply(lambda row: "OWN" + row['Owner'].split(" - ")[0][3:].lstrip('0') + " " + row['Property'].split(maxsplit=1)[1], axis=1)
+        tmp = df['Amount']
         df['Amount'] = df['Amount'].abs()
         df['Email'] = "CHANTELLEP@GARYMANNESTATES.CO.ZA"
         df['POP reference'] = df.apply(lambda row: "POP OWN" + row['Owner'].split(" - ")[0][3:].lstrip('0') + " " + row['Property'].split(maxsplit=1)[1], axis=1)
