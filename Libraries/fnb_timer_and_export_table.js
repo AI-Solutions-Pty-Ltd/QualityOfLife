@@ -43,6 +43,9 @@ function copyToClipboard(text) {
   document.body.removeChild(textarea);
 }
 
+const parentDiv = document.getElementById('shortCutLinks');
+parentDiv.childNodes[5].click()
+
 setInterval(() => {
   const continueButton = document.querySelector('a.timeOutContinue');
   if (continueButton) {
