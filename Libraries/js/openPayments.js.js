@@ -1,0 +1,1 @@
+document.getElementById('shortCutLinks').childNodes[5].click()
