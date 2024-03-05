@@ -34,99 +34,39 @@ def parse_excel_gui(tab_control):
 
 
 def parse_excel(excel_data, checkbox_value):
-    print(checkbox_value)
-    try:
-        df = pd.read_csv(io.StringIO(excel_data), delimiter="\t")
-        if checkbox_value:
-            for index, row in df.iterrows():
-                # Access row values using row['column_name']
-                owner = row["Owner"][0:8]
-                property = row["Property"][0:8]
-                # web_url = f"https://rms.propertysuite.co.za/Owners/Owner.aspx?OwnerID={owner}&PID={property}"
-                web_url = f"https://rms.propertysuite.co.za/Route/?d=stmt&tp=own&o={owner}&p={property}"
-                webbrowser.open_new_tab(web_url)
+    df = pd.read_csv(io.StringIO(excel_data), delimiter="\t")
+    df.columns = df.columns.str.lower().str.strip()  # Lowercase the column names and remove leading/trailing whitespaces
+    if checkbox_value:
+        for index, row in df.iterrows():
+            owner = row["owner"][:8]
+            property = row["property"][:8]
+            web_url = f"https://rms.propertysuite.co.za/Route/?d=stmt&tp=own&o={owner}&p={property}"
+            webbrowser.open_new_tab(web_url)
 
-        # Make changes to the data
-        df["Batch Name"] = df.apply(
-            lambda row: "OWNER " + row["Property"].split(maxsplit=1)[1], axis=1
-        )
+    df["batch name"] = df.apply(lambda row: "OWNER " + row["property"].split(maxsplit=1)[1], axis=1)
 
-        try:
-            df["Owner name"] = df.apply(
-                lambda row: row["Owner"].split(" - ")[1].split(maxsplit=1)[1].strip(),
-                axis=1,
-            )
-        except:
-            df["Owner"] = df.apply(
-                lambda row: row["Owner"].split(" - ")[1].split(maxsplit=1)[1].strip(),
-                axis=1,
-            )
-        try:
-            df["Bank"] = df["BANK"]
-        except:
-            try:
-                df["BANK"] = df["BANK"]
-            except:
-                df["BANK "] = df["BANK"]
+    df["owner name"] = df.apply(lambda row: row["owner"].split(" - ")[1].split(maxsplit=1)[1].strip(), axis=1)
 
-        try:
-            df["Account Number"] = df["ACC NUM"]
-        except:
-            try:
-                df["Account Number"] = df["ACC NUMBER"]
-            except:
-                df["Account Number"] = df["BANK ACC"]
+    df["account number"] = df["acc num"] if "acc num" in df else df["acc number"] if "acc number" in df else df["bank acc"]
 
-        df["Their Reference"] = df.apply(
-            lambda row: "GME " + row["Property"].split(maxsplit=1)[1] + " RENT", axis=1
-        )
-        df["My Reference"] = df.apply(
-            lambda row: "OWN"
-            + row["Owner"].split(" - ")[0][3:].lstrip("0")
-            + " "
-            + row["Property"].split(maxsplit=1)[1],
-            axis=1,
-        )
-        tmp = df["Amount"]
-        df["Amount"] = df["Amount"].abs()
-        df["Email"] = "CHANTELLEP@GARYMANNESTATES.CO.ZA"
-        df["POP reference"] = df.apply(
-            lambda row: "POP OWN"
-            + row["Owner"].split(" - ")[0][3:].lstrip("0")
-            + " "
-            + row["Property"].split(maxsplit=1)[1],
-            axis=1,
-        )
+    df["their reference"] = df.apply(lambda row: "GME " + row["property"].split(maxsplit=1)[1] + " RENT", axis=1)
+    df["my reference"] = df.apply(lambda row: "OWN" + row["owner"].split(" - ")[0][3:].lstrip("0") + " " + row["property"].split(maxsplit=1)[1], axis=1)
+    
+    df["amount"] = df["amount"].str.replace(',', '')
+    df["amount"] = pd.to_numeric(df["amount"], errors='coerce').abs()
 
-        # Select only the required columns
-        df = df[
-            [
-                "Batch Name",
-                "Owner name",
-                "Bank",
-                "Account Number",
-                "Their Reference",
-                "My Reference",
-                "Amount",
-                "Email",
-                "POP reference",
-            ]
-        ]
 
-        today = datetime.date.today().strftime("%Y-%m-%d")
-        save_file_dialog = filedialog.asksaveasfilename(
-            defaultextension=".xlsx",
-            filetypes=[("Excel Files", "*.xlsx")],
-            initialfile=f"{today}.xlsx",
-        )
+    df["email"] = "chantellep@garymannestates.co.za"
+    df["pop reference"] = df.apply(lambda row: "POP OWN" + row["owner"].split(" - ")[0][3:].lstrip("0") + " " + row["property"].split(maxsplit=1)[1], axis=1)
 
-        if save_file_dialog:
-            df.to_excel(save_file_dialog, index=False)
-            messagebox.showinfo("Success", "Excel file created successfully!")
-            os.startfile(save_file_dialog)  # Open the saved Excel file
-        else:
-            messagebox.showwarning(
-                "Warning", "No file selected. Excel file not created."
-            )
-    except pd.errors.ParserError:
-        messagebox.showerror("Error", "Invalid data format!")
+    df = df[["batch name", "owner name", "bank", "account number", "their reference", "my reference", "amount", "email", "pop reference"]]
+
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    save_file_dialog = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel Files", "*.xlsx")], initialfile=f"{today}.xlsx")
+
+    if save_file_dialog:
+        df.to_excel(save_file_dialog, index=False)
+        messagebox.showinfo("Success", "Excel file created successfully!")
+        os.startfile(save_file_dialog)
+    else:
+        messagebox.showwarning("Warning", "No file selected. Excel file not created.")
