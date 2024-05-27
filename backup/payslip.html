@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payslip</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <div v-for="date in dates" style="page-break-after: always" class="mt-4">
+        <h1 class="mb-4">Payslip</h1>
+        <hr />
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              <h5 for="employeeName" class="form-label">Employee Name:</h5>
+              <h4 id="employeeName">{{employeeName}}</h4>
+            </div>
+          </div>
+          <hr />
+          <div class="col-6">
+            <div class="mb-3">
+              <h5 for="employerName" class="form-label">Employer Name:</h5>
+              <h4 id="employerName">{{employerName}}</h4>
+              <ul>
+                Vanderbijlpark
+              </ul>
+            </div>
+          </div>
+          <div class="col-6">
+            <div
+              style="display: flex; align-items: end; flex-direction: column"
+            >
+              <h5 for="date" class="form-label">Date:</h5>
+              <h4 id="date">{{date}}</h4>
+            </div>
+          </div>
+          <hr />
+        </div>
+
+        <table class="table">
+          <tr>
+            <td>Salary:</td>
+            <td style="text-align: end">
+              R {{ salary.toLocaleString('en-US', {minimumFractionDigits: '2'})
+              }}
+            </td>
+          </tr>
+          <template v-for="(deduction, index) in deductions" :key="index">
+            <tr v-if="deduction.amount != 0">
+              <td>Deductions: {{ deduction.name }}</td>
+              <td style="text-align: end">
+                R {{ deduction.amount.toLocaleString('en-US',
+                {minimumFractionDigits: '2'}) }}
+              </td>
+            </tr>
+          </template>
+
+          <tr>
+            <td>Net Salary:</td>
+            <td style="text-align: end">
+              R {{ netSalary.toLocaleString('en-US', {minimumFractionDigits:
+              '2'}) }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.2.20/dist/vue.global.prod.js"></script>
+    <script>
+      const { ref, computed, createApp } = Vue;
+
+      const app = createApp({
+        setup() {
+          const employerName = ref("J Reen Investments");
+          const dates = ref([
+            "2024-01-31",
+            "2024-02-29", 
+            "2024-03-31",
+          ]);
+
+          const employeeName = ref("Agnes N Tshabalala");
+          const salary = ref(3524.89);
+          const deductions = ref([
+            {
+              name: "UIF",
+              amount:
+                salary.value < 17712.0
+                  ? (salary.value * 0.01).toFixed(2)
+                  : 177.12,
+            },
+            { name: "LOAN", amount: 0 },
+            { name: "TAX", amount: 0 },
+          ]);
+
+          const netSalary = computed(() => {
+            let totalDeductions = 0;
+            for (let deduction of deductions.value) {
+              totalDeductions += parseFloat(deduction.amount);
+            }
+            return (salary.value - totalDeductions).toFixed(2);
+          });
+
+          return {
+            employerName,
+            dates,
+            employeeName,
+            salary,
+            deductions,
+            netSalary,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

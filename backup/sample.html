@@ -1,0 +1,622 @@
+<div id="paymentsTable_tableContent">
+  <!----------------------------------------- items ----------------------------------------->
+
+  <!-- iterate through the groups -->
+
+  <div class="tableHeaderRow tableGroupHeader selectAdjust">
+    <!-- the tableRowHeader class is required for selection purposes, but doesn't require an actual css definition as such. MG -->
+    <div class="tableHeaderInnerRow">
+      <!-- the last class, tableRowHeader, is required for selection purposes, but doesn't require an actual css definition as such. MG -->
+
+      <span class="item">
+        <span class="hinner">
+          <span class="tableHinnerImage"></span
+          ><span class="tableHinnerContent noGroupImg"
+            >All the batches you can maintain</span
+          >
+        </span>
+      </span>
+      <!-- the key is the header value -->
+    </div>
+  </div>
+
+  <div id="tableHeaderRow_0" class="tableHeaderRow tableRowHeader">
+    <!-- the tableRowHeader class is required for selection purposes, but doesn't require an actual css definition as such. MG -->
+    <div class="tableHeaderInnerRow">
+      <div
+        id="rowGroup_0_group1_heading_group"
+        class="tableHeaderInner groupColCell groupedCol1 clearfix"
+      >
+        <div class="groupedHeaderInner clearfix">
+          <div class="tableCell col1">
+            <div class="tableHeaderCellItem">
+              <a
+                onclick="paymentsTable_tableController.sortTable(1, 'batchName'); return false;"
+              >
+                <div class="hinner">Name</div></a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col2">
+            <div class="tableHeaderCellItem">
+              <a
+                onclick="paymentsTable_tableController.sortTable(2, 'executionDate'); return false;"
+              >
+                <div class="hinner">Details</div></a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col3 right">
+            <div class="tableHeaderCellItem">
+              <a
+                onclick="paymentsTable_tableController.sortTable(3, 'batchTotal'); return false;"
+              >
+                <div class="hinner right">Total</div></a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col4">
+            <div class="tableHeaderCellItem">
+              <a
+                onclick="paymentsTable_tableController.sortTable(4, 'batchStatusDescription'); return false;"
+              >
+                <div class="hinner">Status</div></a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col5 right">
+            <div class="tableHeaderCellItem">
+              <a
+                onclick="paymentsTable_tableController.sortTable(5, 'eziButton'); return false;"
+              >
+                <div class="hinner right">&nbsp;</div></a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col6 selectAllActive">
+            <div class="tableHeaderCellItem">
+              <div
+                id="checkall-toggle-wrapper-6"
+                class="checkall-toggle-wrapper"
+              >
+                <a
+                  id="check-all-6"
+                  class="checkall-check-link checkall-link selectAllLink"
+                  data-check-group="#paymentsTable .tableRowGroup1 .col6"
+                  >Select all</a
+                >
+                <a
+                  id="uncheck-all-6"
+                  class="checkall-uncheck-link checkall-link selectAllLink"
+                  data-check-group="#paymentsTable .tableRowGroup1 .col6"
+                  style="display: none"
+                  >Deselect all</a
+                >
+              </div>
+              <a class="hinner"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- the values are an array list of rows, iterate through each  -->
+
+  <!-- "tableDataRow" required for selection purposes. MG -->
+
+  <div id="tabelRow_120" class="tableRow tableDataRow tableRowGroup1 clearfix">
+    <div class="tableRowInner clearfix">
+      <div
+        id="group1_column_group"
+        class="tableGroup groupColCell group1 groupedCol1 clearfix"
+      >
+        <div class="tableRowGroupInner">
+          <div class="tableCell col1" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_batchName119"
+              name="doubleItem_top_div_batchName119"
+              class="tableCellItem doubleItemTop stack"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchView&amp;BARFN=254008874&amp;filterFunction=1937&amp;FARFN=1318&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3');; return false;"
+                >OWNER 13 SATURN STR 0607</a
+              >
+            </div>
+            <div
+              id="doubleItem_bottom_div_templateName"
+              name="doubleItem_bottom_div_templateName"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              &nbsp;
+            </div>
+          </div>
+
+          <div class="tableCell col2" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_date119"
+              name="doubleItem_top_div_date119"
+              class="tableCellItem doubleItemTop stack"
+            >
+              2023/07/07
+            </div>
+            <div
+              id="doubleItem_bottom_div_serviceType"
+              name="doubleItem_bottom_div_serviceType"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              Pay &amp; Clear Now
+            </div>
+          </div>
+
+          <div class="tableCell col3 right" data-value="tableHeaderRow_0">
+            <div
+              id="batchTotal_119"
+              name="batchTotal"
+              class="tableCellItem large"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchViewSummary&amp;BARFN=254008874&amp;filterFunction=1937&amp;FARFN=1307&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3IFN1bW1hcnk=');; return false;"
+                >3,248.83</a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col4" data-value="tableHeaderRow_0">
+            <div
+              id="batchStatusDescription"
+              name="batchStatusDescription"
+              class="tableCellItem"
+            >
+              Fully Processed
+            </div>
+          </div>
+
+          <div class="tableCell col5 right" data-value="tableHeaderRow_0">
+            <div class="eziLinks">
+              <span class="eziLink btt_1 eziBtn1_eziLink disabled" onclick=""
+                >Reject</span
+              >
+
+              <span
+                class="eziLink btt_2 eziBtn2_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('popupLoadUrl', '/banking/Controller?nav=payments.complex.PaymentBatchDeleteConfirm&amp;TBRFN0=254008874&amp;FARFN=1410&amp;pN=UGF5bWVudCBCYXRjaCBEZWxldGUgQ29uZmlybQ==&amp;tableKey=paymentsLandingTableViewBean');"
+                >Delete</span
+              >
+
+              <span
+                class="eziLink btt_3 eziBtn3_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadUrlToWorkspace', {url: '/banking/Controller?nav=payments.complex.CopyPaymentCapture&amp;action=prepareAddOnceOff&amp;TBRFN_0=254008874&amp;type_0=11&amp;FARFN=1406&amp;pN=Q29weSBQYXltZW50IENhcHR1cmU=&amp;tableKey=paymentsLandingTableViewBean'});"
+                >Copy</span
+              >
+
+              <span class="eziLink btt_4 eziBtn4_eziLink disabled" onclick=""
+                >De-Auth</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="tableCell col6 selectAllActive"
+            data-value="tableHeaderRow_0"
+          >
+            <div id="batchRFN" name="batchRFN" class="tableCellItem">
+              <div
+                id="batchRFN119-graphic-wrapper"
+                class="checkbox-graphic-wrapper"
+              >
+                <input
+                  id="batchRFN119"
+                  name="batchRFN119"
+                  class="checkbox-input transparent"
+                  type="checkbox"
+                  value="254008874_11"
+                />
+                <div id="batchRFN119-graphic" class="checkbox-graphic"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="expandableRow_paymentsTable_row_120"
+    class="expandableTableRow"
+  ></div>
+
+  <!-- the values are an array list of rows, iterate through each  -->
+
+  <!-- "tableDataRow" required for selection purposes. MG -->
+
+  <div id="tabelRow_252" class="tableRow tableDataRow tableRowGroup1 clearfix">
+    <div class="tableRowInner clearfix">
+      <div
+        id="group1_column_group"
+        class="tableGroup groupColCell group1 groupedCol1 clearfix"
+      >
+        <div class="tableRowGroupInner">
+          <div class="tableCell col1" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_batchName251"
+              name="doubleItem_top_div_batchName251"
+              class="tableCellItem doubleItemTop stack"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchView&amp;BARFN=253572101&amp;filterFunction=1937&amp;FARFN=1318&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3');; return false;"
+                >SUP HYDRO RUBBER APR23.2</a
+              >
+            </div>
+            <div
+              id="doubleItem_bottom_div_templateName"
+              name="doubleItem_bottom_div_templateName"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              &nbsp;
+            </div>
+          </div>
+
+          <div class="tableCell col2" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_date251"
+              name="doubleItem_top_div_date251"
+              class="tableCellItem doubleItemTop stack"
+            >
+              2023/07/11
+            </div>
+            <div
+              id="doubleItem_bottom_div_serviceType"
+              name="doubleItem_bottom_div_serviceType"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              Same Day
+            </div>
+          </div>
+
+          <div class="tableCell col3 right" data-value="tableHeaderRow_0">
+            <div
+              id="batchTotal_251"
+              name="batchTotal"
+              class="tableCellItem large"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchViewSummary&amp;BARFN=253572101&amp;filterFunction=1937&amp;FARFN=1307&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3IFN1bW1hcnk=');; return false;"
+                >
+                28,948.33
+              </a>
+            </div>
+          </div>
+
+          <div class="tableCell col4" data-value="tableHeaderRow_0">
+            <div
+              id="batchStatusDescription"
+              name="batchStatusDescription"
+              class="tableCellItem"
+            >
+              Fully Processed
+            </div>
+          </div>
+
+          <div class="tableCell col5 right" data-value="tableHeaderRow_0">
+            <div class="eziLinks">
+              <span class="eziLink btt_1 eziBtn1_eziLink disabled" onclick=""
+                >Reject</span
+              >
+
+              <span
+                class="eziLink btt_2 eziBtn2_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('popupLoadUrl', '/banking/Controller?nav=payments.complex.PaymentBatchDeleteConfirm&amp;TBRFN0=253572101&amp;FARFN=1410&amp;pN=UGF5bWVudCBCYXRjaCBEZWxldGUgQ29uZmlybQ==&amp;tableKey=paymentsLandingTableViewBean');"
+                >Delete</span
+              >
+
+              <span
+                class="eziLink btt_3 eziBtn3_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadUrlToWorkspace', {url: '/banking/Controller?nav=payments.complex.CopyPaymentCapture&amp;action=prepareAddOnceOff&amp;TBRFN_0=253572101&amp;type_0=11&amp;FARFN=1406&amp;pN=Q29weSBQYXltZW50IENhcHR1cmU=&amp;tableKey=paymentsLandingTableViewBean'});"
+                >Copy</span
+              >
+
+              <span class="eziLink btt_4 eziBtn4_eziLink disabled" onclick=""
+                >De-Auth</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="tableCell col6 selectAllActive"
+            data-value="tableHeaderRow_0"
+          >
+            <div id="batchRFN" name="batchRFN" class="tableCellItem">
+              <div
+                id="batchRFN251-graphic-wrapper"
+                class="checkbox-graphic-wrapper"
+              >
+                <input
+                  id="batchRFN251"
+                  name="batchRFN251"
+                  class="checkbox-input transparent"
+                  type="checkbox"
+                  value="253572101_11"
+                />
+                <div id="batchRFN251-graphic" class="checkbox-graphic"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="expandableRow_paymentsTable_row_252"
+    class="expandableTableRow"
+  ></div>
+
+  <!-- the values are an array list of rows, iterate through each  -->
+
+  <!-- "tableDataRow" required for selection purposes. MG -->
+
+  <div id="tabelRow_310" class="tableRow tableDataRow tableRowGroup1 clearfix">
+    <div class="tableRowInner clearfix">
+      <div
+        id="group1_column_group"
+        class="tableGroup groupColCell group1 groupedCol1 clearfix"
+      >
+        <div class="tableRowGroupInner">
+          <div class="tableCell col1" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_batchName309"
+              name="doubleItem_top_div_batchName309"
+              class="tableCellItem doubleItemTop stack"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchView&amp;BARFN=253287414&amp;filterFunction=1937&amp;FARFN=1318&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3');; return false;"
+                >SALARIES - GME - JUN23</a
+              >
+            </div>
+            <div
+              id="doubleItem_bottom_div_templateName"
+              name="doubleItem_bottom_div_templateName"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              &nbsp;
+            </div>
+          </div>
+
+          <div class="tableCell col2" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_date309"
+              name="doubleItem_top_div_date309"
+              class="tableCellItem doubleItemTop stack"
+            >
+              2023/06/23
+            </div>
+            <div
+              id="doubleItem_bottom_div_serviceType"
+              name="doubleItem_bottom_div_serviceType"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              Pay &amp; Clear Now
+            </div>
+          </div>
+
+          <div class="tableCell col3 right" data-value="tableHeaderRow_0">
+            <div
+              id="batchTotal_309"
+              name="batchTotal"
+              class="tableCellItem large"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchViewSummary&amp;BARFN=253287414&amp;filterFunction=1937&amp;FARFN=1307&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3IFN1bW1hcnk=');; return false;"
+                >540,415.15</a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col4" data-value="tableHeaderRow_0">
+            <div
+              id="batchStatusDescription"
+              name="batchStatusDescription"
+              class="tableCellItem"
+            >
+              Fully Processed
+            </div>
+          </div>
+
+          <div class="tableCell col5 right" data-value="tableHeaderRow_0">
+            <div class="eziLinks">
+              <span class="eziLink btt_1 eziBtn1_eziLink disabled" onclick=""
+                >Reject</span
+              >
+
+              <span
+                class="eziLink btt_2 eziBtn2_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('popupLoadUrl', '/banking/Controller?nav=payments.complex.PaymentBatchDeleteConfirm&amp;TBRFN0=253287414&amp;FARFN=1410&amp;pN=UGF5bWVudCBCYXRjaCBEZWxldGUgQ29uZmlybQ==&amp;tableKey=paymentsLandingTableViewBean');"
+                >Delete</span
+              >
+
+              <span
+                class="eziLink btt_3 eziBtn3_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadUrlToWorkspace', {url: '/banking/Controller?nav=payments.complex.CopyPaymentCapture&amp;action=prepareAddOnceOff&amp;TBRFN_0=253287414&amp;type_0=11&amp;FARFN=1406&amp;pN=Q29weSBQYXltZW50IENhcHR1cmU=&amp;tableKey=paymentsLandingTableViewBean'});"
+                >Copy</span
+              >
+
+              <span class="eziLink btt_4 eziBtn4_eziLink disabled" onclick=""
+                >De-Auth</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="tableCell col6 selectAllActive"
+            data-value="tableHeaderRow_0"
+          >
+            <div id="batchRFN" name="batchRFN" class="tableCellItem">
+              <div
+                id="batchRFN309-graphic-wrapper"
+                class="checkbox-graphic-wrapper"
+              >
+                <input
+                  id="batchRFN309"
+                  name="batchRFN309"
+                  class="checkbox-input transparent"
+                  type="checkbox"
+                  value="253287414_11"
+                />
+                <div id="batchRFN309-graphic" class="checkbox-graphic"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="expandableRow_paymentsTable_row_310"
+    class="expandableTableRow"
+  ></div>
+
+  <!-- the values are an array list of rows, iterate through each  -->
+
+  <!-- "tableDataRow" required for selection purposes. MG -->
+
+  <div id="tabelRow_341" class="tableRow tableDataRow tableRowGroup1 clearfix">
+    <div class="tableRowInner clearfix">
+      <div
+        id="group1_column_group"
+        class="tableGroup groupColCell group1 groupedCol1 clearfix"
+      >
+        <div class="tableRowGroupInner">
+          <div class="tableCell col1" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_batchName340"
+              name="doubleItem_top_div_batchName340"
+              class="tableCellItem doubleItemTop stack"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchView&amp;BARFN=252387439&amp;filterFunction=1937&amp;FARFN=1318&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3');; return false;"
+                >SUPPLIERS - STONEWORKS BALANCE</a
+              >
+            </div>
+            <div
+              id="doubleItem_bottom_div_templateName"
+              name="doubleItem_bottom_div_templateName"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              &nbsp;
+            </div>
+          </div>
+
+          <div class="tableCell col2" data-value="tableHeaderRow_0">
+            <div
+              id="doubleItem_top_div_date340"
+              name="doubleItem_top_div_date340"
+              class="tableCellItem doubleItemTop stack"
+            >
+              2023/06/21
+            </div>
+            <div
+              id="doubleItem_bottom_div_serviceType"
+              name="doubleItem_bottom_div_serviceType"
+              class="tableCellItem doubleItemBottom stack"
+            >
+              Pay &amp; Clear Now
+            </div>
+          </div>
+
+          <div class="tableCell col3 right" data-value="tableHeaderRow_0">
+            <div
+              id="batchTotal_340"
+              name="batchTotal"
+              class="tableCellItem large"
+            >
+              <a
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadResultScreen','/banking/Controller?nav=payments.complex.navigator.UnNominatedPaymentBatchViewSummary&amp;BARFN=252387439&amp;filterFunction=1937&amp;FARFN=1307&amp;pN=VW5Ob21pbmF0ZWQgUGF5bWVudCBCYXRjaCBWaWV3IFN1bW1hcnk=');; return false;"
+                >22,007.10</a
+              >
+            </div>
+          </div>
+
+          <div class="tableCell col4" data-value="tableHeaderRow_0">
+            <div
+              id="batchStatusDescription"
+              name="batchStatusDescription"
+              class="tableCellItem"
+            >
+              Fully Processed
+            </div>
+          </div>
+
+          <div class="tableCell col5 right" data-value="tableHeaderRow_0">
+            <div class="eziLinks">
+              <span class="eziLink btt_1 eziBtn1_eziLink disabled" onclick=""
+                >Reject</span
+              >
+
+              <span
+                class="eziLink btt_2 eziBtn2_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('popupLoadUrl', '/banking/Controller?nav=payments.complex.PaymentBatchDeleteConfirm&amp;TBRFN0=252387439&amp;FARFN=1410&amp;pN=UGF5bWVudCBCYXRjaCBEZWxldGUgQ29uZmlybQ==&amp;tableKey=paymentsLandingTableViewBean');"
+                >Delete</span
+              >
+
+              <span
+                class="eziLink btt_3 eziBtn3_eziLink"
+                onclick="fnb.controls.controller.eventsObject.raiseEvent('loadUrlToWorkspace', {url: '/banking/Controller?nav=payments.complex.CopyPaymentCapture&amp;action=prepareAddOnceOff&amp;TBRFN_0=252387439&amp;type_0=11&amp;FARFN=1406&amp;pN=Q29weSBQYXltZW50IENhcHR1cmU=&amp;tableKey=paymentsLandingTableViewBean'});"
+                >Copy</span
+              >
+
+              <span class="eziLink btt_4 eziBtn4_eziLink disabled" onclick=""
+                >De-Auth</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="tableCell col6 selectAllActive"
+            data-value="tableHeaderRow_0"
+          >
+            <div id="batchRFN" name="batchRFN" class="tableCellItem">
+              <div
+                id="batchRFN340-graphic-wrapper"
+                class="checkbox-graphic-wrapper"
+              >
+                <input
+                  id="batchRFN340"
+                  name="batchRFN340"
+                  class="checkbox-input transparent"
+                  type="checkbox"
+                  value="252387439_11"
+                />
+                <div id="batchRFN340-graphic" class="checkbox-graphic"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="expandableRow_paymentsTable_row_341"
+    class="expandableTableRow"
+  ></div>
+
+  <div class="footerMessage hideElement" id="footerMessage">
+    <div class="footerMessageInner">
+      <div class="footerMessageInnerTwo">
+        <div id="footerMessageTotal" class="footerMessageTotal"></div>
+        <div id="footerMessageText" class="footerMessageText">
+          You are about to pay
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>
