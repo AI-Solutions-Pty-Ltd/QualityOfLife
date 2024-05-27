@@ -1,5 +1,7 @@
 import pyperclip
 import json
+
+import csv
 import requests
 from bs4 import BeautifulSoup
 # from generate_pdf import generate_pdf
@@ -197,72 +199,105 @@ end_date = '28022023'
 def open_urls_in_browser(tenants):
     data = []
     for tenant in tenants:
-        tenant_data = {
-            "Tenant": tenant['Tenant'],
-            "Property": tenant['Property'],
-            "Transactions": [],
-        }
         ten = tenant['Tenant #']
         pro = tenant['Property #']
         owner = tenant['Owner #']
+        tenant_data = {
+            "Tenant": ten,
+            "Property": pro,
+            "Owner": owner,
+            "Transactions": [],
+        }
         print(ten, pro, owner)
-        url = f"https://rms.propertysuite.co.za/Reports/Tenants/TenantMonthly.aspx?TID={ten}&PID={pro}&OID={owner}&STD={start_date}&EDD={end_date}"
+        # url = f"https://rms.propertysuite.co.za/Reports/Tenants/TenantMonthly.aspx?TID={ten}&PID={pro}&OID={owner}&STD={start_date}&EDD={end_date}"
+        url = f"https://rms.propertysuite.co.za/Reports/Owners/OwnerMonthly.aspx?OID={owner}&PID={pro}&TID={ten}&STD={start_date}&EDD={end_date}&IFD=YES&SHOW=NO&EDIT=NO"
         page = requests.get(url, cookies=cookies)
         soup = BeautifulSoup(page.content, "html.parser")
         
-        
-        elements = soup.find_all(lambda tag: tag.name == 'div' and tag.get('style') == ' font-size:larger; font-weight:bold ; text-decoration:underline ')
-        for element in elements:
-            element.extract()
-
+        # elements = soup.find_all(lambda tag: tag.name == 'div' and tag.get('style') == ' font-size:larger; font-weight:bold ; text-decoration:underline ')
+        # for element in elements:
+        #     element.extract()
         # elements = soup.find_all('link', href='https://rms.propertysuite.co.za/stylesheets/Reports_02.css?v=005')
         # for element in elements:
         #     element.extract()
-        form = soup.find("form")
+        # form = soup.find("form")
         # generate_pdf(form.prettify(), owner, ten, pro, start_date, end_date)
-        results = soup.find(id="aspnetForm")
-        tables = results.find_all("table", class_="table_report")
+        # results = soup.find(id="aspnetForm")
+        tables = soup.find_all("table", class_="table_report")
         
         count = 0
-        statement = None
+
         for table in tables:
-            count += 1
+            if count == 2:
+                owner_statement = table
             if count == 4:
-                statement = table
-                break
-        
-        rows = statement.find_all("tr")
-        count = 0
-        for row in rows:
+                tenant_statement = table
             count += 1
-            if count < 3:
-                continue
-            cols = row.find_all("td")
-            dt = cols[4].get_text().replace(",","")
-            if dt and dt != "\xa0":
-                dt = float(dt)
-            else:
-                dt = 0
-            ct = cols[5].get_text().replace(",","")
-            if ct and ct != "\xa0":
-                ct = float(ct)
-            else:
-                ct = 0
-            amount = dt - ct
-            transaction = {
-                "tenant": tenant['Tenant'],
-                "property": tenant['Property'],
-                "owner": tenant['Owner'],
-                "date" : cols[2].get_text(),
-                "description" : cols[1].get_text(),
-                "vat" : cols[3].get_text(),
-                "amount" : amount,
-                "balance" : cols[6].get_text(),
-            }
-            data.append(transaction)
-            # tenant_data['Transactions'].append(transaction)
-        # data.append(tenant_data)
+        
+        data = extract_transactions(data, owner_statement, ten, pro, owner, "owner")
+        data = extract_transactions(data, tenant_statement, ten, pro, owner, "tenant")
+
+
     data_json = json.dumps(data, indent=1)
     pyperclip.copy(data_json)
 
+    # save to csv file
+    with open(f"transactions.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["type", "tenant", "property", "owner", "ContraAcc", "date", "description", "amount", "balance"])
+        writer.writerows(data)
+
+def extract_transactions(data, statement, tenant, property, owner, type):
+    rows = statement.find_all("tr")
+    count = 0
+    for row in rows:
+        count += 1
+        if count < 3: # 1st and 2nd row are headers
+            continue
+        
+        cols = row.find_all("td")
+        
+        if cols[1].get_text() == "No Data for Selected Period":
+            transaction = {
+                "type": type,
+                "tenant": tenant,
+                "property": property,
+                "owner": owner,
+                "ContraAcc": "",
+                "date" : "",
+                "description" : "no transactions found",
+                "amount" : 0,
+                "balance" : "",
+            }
+            data.append(transaction)
+            return data
+        
+        contra = cols[0].get_text(separator='|')
+        contra_cols = contra.split('|')
+        contra_acc_value = contra_cols[4].split(':')[-1].strip()
+
+        dt = cols[3].get_text().replace(",","")
+        ct = cols[4].get_text().replace(",","")
+
+        if dt and dt != "\xa0":
+            amount = float(dt)
+        elif ct and ct != "\xa0":
+            amount = -float(ct)
+        else:
+            raise ValueError("No amount found")
+        transaction = {
+            "type": type,
+            "tenant": tenant,
+            "property": property,
+            "owner": owner,
+            "ContraAcc": contra_acc_value,
+            "date" : cols[2].get_text(),
+            "description" : cols[1].get_text(),
+            "amount" : amount,
+            "balance" : cols[5].get_text(),
+        }
+        data.append(transaction)
+
+    return data
+      
 open_urls_in_browser(tenants)
